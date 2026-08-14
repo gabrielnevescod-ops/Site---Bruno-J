@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruno Jarotzky Neto - Assessoria Contábil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <img src="./logotentativa.png" alt="Logotipo Bruno Jarotzky Neto" class="logo-img">
+
+            <div class="brujarTexto">
+
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#planos">Planos</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section id="inicio" class="hero container">
+            <div class="hero-content">
+                <div class="badge">
+                    <span class="dot"></span> RS-011117/O · Empresa contábil
+                </div>
+                <h1>Transformando a <span class="highlight">burocracia</span> em gestão</h1>
+                <p></p>
+                <div class="hero-actions">
+                    <a href="#planos" class="btn btn-primary">Ver Planos →</a>
+                    <a href="#sobre" class="btn btn-outline">Sobre nós</a>
+                </div>
+            </div>
+
+            <div class="contato-coluna">
+
+                <div class="btn-topo-container">
+                    <a href="https://wa.me/5551989333113?text=Olá,%20Bruno!%20Gostaria%20de%20saber%20mais%20sobre%20a%20assessoria%20contábil.
+                    " target="_blank" class="btn btn-primary">Fale com o contador</a>
+                    
+                    <p class="texto-ou">ou</p>
+                </div>
+
+                <div id="contato" class="hero-form-wrapper">
+                    <form class="lead-form">
+                        <h2>Solicite uma análise gratuita</h2>
+                        <p>Preencha seus dados e entro em contato em até 24h.</p>
+
+                        <div class="form-group">
+                            <label for="nome">NOME COMPLETO</label>
+                            <input type="text" id="nome" placeholder="Seu nome" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">E-MAIL</label>
+                                <input type="email" id="email" placeholder="seu@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="whatsapp">WHATSAPP</label>
+                                <input type="tel" id="whatsapp" placeholder="(51) 9 9999-9999" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <!-- Primeira Seleção: O que o cliente precisa -->
+                            <div class="form-group">
+                                <label for="necessidade">DO QUE PRECISA?</label>
+                                <select id="necessidade" required>
+                                    <option value="">Selecione</option>
+                                    <option value="abrir_empresa">Abrir uma empresa</option>
+                                    <option value="trocar_contador">Trocar de contador</option>
+                                    <option value="deixar_mei">Deixar de ser MEI</option>
+                                </select>
+                            </div>
+
+                            <!-- Segunda Seleção: Setor da empresa -->
+                            <div class="form-group">
+                                <label for="setor">SETOR DE ATUAÇÃO</label>
+                                <select id="setor" required>
+                                    <option value="">Selecione</option>
+                                    <option value="servicos">Serviços</option>
+                                    <option value="comercio">Comércio</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Solicitar Análise Gratuita →</button>
+                    </form>
+                </div>
+        </section>
+
+        <section id="planos" class="pricing-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle-gold">Planos e Preços</span>
+                    <h2>Escolha o plano ideal para o seu negócio</h2>
+                    <p>Planos mensais com tudo que a sua empresa precisa para estar em dia com o fisco.</p>
+                </div>
+
+                <div class="pricing-cards">
+                    
+                        <div class="card card-featured">
+                        <div class="card-header">
+                            <span class="card-category">Assessoria Mensal · Simples Nacional</span>
+                            <h3>Serviços</h3>
+                            <p>Empresas prestadoras de serviços no Simples Nacional</p>
+                        </div>
+                        <div class="price-box">
+                            <span class="price-label">a partir de</span>
+                            <div class="price">
+                                <span class="currency">R$</span>
+                                <span class="amount">399</span>
+                                <span class="period">/mês</span>
+                            </div>
+                        </div>
+                        <div class="card-features">
+                            <p class="features-title">Incluso no plano:</p>
+                            <ul>
+                                <li><span class="check-icon">✓</span> Suporte direto com contador</li>
+                                <li><span class="check-icon">✓</span> Assessoria contábil e fiscal</li>
+                                <li><span class="check-icon">✓</span> Abertura ou alteração gratuita</li>
+                                <li><span class="check-icon">✓</span> Pró-labore de 2 sócios</li>
+                                <li><span class="check-icon">✓</span> Certificado digital A1 (eCNPJ)</li>
+                            </ul>
+                        </div>
+
+                        <a href="#contato" class="btn btn-outline btn-block"
+                            onclick="preencherFormulario('servicos')">Contratar Plano →</a>
+
+                    </div>
+
+                    <div class="card card-featured">
+
+                        <div class="card-header">
+                            <span class="card-category">Assessoria Mensal · Simples Nacional</span>
+                            <h3>Comércio</h3>
+                            <p>Empresas comerciais e varejistas no Simples Nacional</p>
+                        </div>
+                        <div class="price-box">
+                            <span class="price-label">a partir de</span>
+                            <div class="price">
+                                <span class="currency">R$</span>
+                                <span class="amount">599</span>
+                                <span class="period">/mês</span>
+                            </div>
+                        </div>
+                        <div class="card-features">
+                            <p class="features-title">Incluso no plano:</p>
+                            <ul>
+                                <li><span class="check-icon">✓</span> Suporte direto com contador</li>
+                                <li><span class="check-icon">✓</span> Assessoria contábil e fiscal</li>
+                                <li><span class="check-icon">✓</span> Abertura ou alteração gratuita</li>
+                                <li><span class="check-icon">✓</span> Pró-labore de 2 sócios</li>
+                                <li><span class="check-icon">✓</span> Certificado digital A1 (eCNPJ)</li>
+                            </ul>
+                        </div>
+                        <a href="#contato" class="btn btn-primary btn-block"
+                            onclick="preencherFormulario('comercio')">Contratar Plano →</a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="about-section">
+            <div class="container about-wrapper">
+                <div class="about-stats">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <img src="./iconMe.png" alt="iconMeda" class="iconCard">
+                            <h4>CRC-RS 106198/O</h4>
+                            <p>Contador Registrado</p>
+                        </div>
+
+
+                        <div class="stat-card">
+                            <img src="./iconEscud.png" alt="iconEscudo" class="iconCard">
+                            <h4>Simples Nacional</h4>
+                            <p>Especialista</p>
+                        </div>
+
+
+                    </div>
+
+                    <div class="stats-text-row">
+
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Conformidade fiscal</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="about-text">
+                    <span class="subtitle-gold">Sobre a empresa</span>
+                    <h2>
+                        <span class="titulo-brujar">BRUJAR</span>
+                        Assessoria e Consultoria
+                    </h2>
+
+                    <div class="badge-outline">
+                        <img src="./logoPNG.png" alt="" class="iconPrinc"> RS-011117/O · Empresa contábil
+                    </div>
+
+                    <p> "Somos um escritório de contabilidade digital especializado no atendimento a pequenos e médios negócios enquadrados no Simples Nacional. Unimos tecnologia, atendimento próximo e excelência técnica para oferecer soluções contábeis, fiscais, trabalhistas e financeiras que apoiam o crescimento sustentável de cada empresa. Nosso compromisso é compreender as particularidades de cada segmento de atuação, proporcionando um atendimento personalizado, com orientações estratégicas e total conformidade com a legislação. Mais do que cumprir obrigações, trabalhamos para agregar valor ao negócio dos nossos clientes, oferecendo segurança, eficiência e confiança em cada etapa da sua jornada empresarial."</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+
+                    <p class="informacoes-contador">CNPJ: 60.551.792/0001-14
+                        Razão Social: Brujar Assessoria e Consultoria LTDA
+                        Responsável técnico:
+                        Bruno Jarotzky Neto - CRC RS - 106198/O
+                        CÓDIGO E DESCRIÇÃO DA ATIVIDADE ECONÔMICA PRINCIPAL
+                        69.20-6-01 - Atividades de contabilidade</p>
+                </div>
+
+               
+
+                <div class="footer-contact">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li>
+                            <a href="#whatsapp">
+                                <img src="./iconWhats.png" alt="Ícone WhatsApp" class="footer-icon"> (51) 9 8933-3113
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="brunojn@brujar.com.br">
+                                <img src="./Email.png" alt="Ícone E-mail" class="footer-icon"> brunojn@brujar.com.br
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Bruno Jarotzky Neto - Contador. Todos os direitos reservados.</p>
+                <p>CRC-RS 106198/O</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function preencherFormulario(setorEscolhido) {
+            const caixaSetor = document.getElementById('setor');
+
+            caixaSetor.value = setorEscolhido;
+
+            setTimeout(() => {
+                caixaSetor.focus();
+            }, 800);
+        }
+    </script>
+
+
+</body>
+
+</html>

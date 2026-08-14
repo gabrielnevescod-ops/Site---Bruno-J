@@ -1,0 +1,967 @@
+
+/* ==========================================================================
+   1. VARIÁVEIS GERAIS E RESET
+   ========================================================================== */
+:root {
+    /* Cores de Fundo e Gradiente */
+    --bg-gradient-center: #2b2622;
+    --bg-gradient-edges: #141312;
+    
+    /* Cores com Transparência (Formulário) */
+    --bg-form-transparent: rgba(36, 34, 32, 0.55); 
+    --bg-input-transparent: rgba(20, 19, 18, 0.6);
+    
+    /* Cores de Texto e Destaque */
+    --text-main: #f5f5f5;
+    --text-muted: #9e9a96;
+    --primary-gold:#ae731a;
+    --primary-gold-hover: #ae731a;
+    
+    /* Bordas e Efeitos */
+    --border-color: rgba(255, 255, 255, 0.06);
+    --border-radius: 8px;
+    --transition: 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth; /* Ativa a rolagem suave */
+    scroll-padding-top: 120px; /* Dá um desconto para o menu fixo não cobrir os títulos */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Garante que os tamanhos não quebrem */
+}
+
+body {
+   color: var(--text-main);
+   font-family: 'Inter', sans-serif;
+   line-height: 1.6;
+   min-height: 100vh;
+   position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background: radial-gradient(circle at 40% 50%, var(--bg-gradient-center) 0%, var(--bg-gradient-edges) 100%);;
+    
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ==========================================================================
+   2. CABEÇALHO (NAVBAR) - Fixo e Semi-transparente
+   ========================================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+    
+    /* Cabeçalho fixo no topo */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    
+    /* Fundo semi-transparente e efeito de desfoque (Glassmorphism) */
+    background-color: rgba(26, 25, 24, 0.85); /* Tom escuro com 85% de opacidade */
+    backdrop-filter: blur(12px); /* Desfoca o que passa por trás */
+    -webkit-backdrop-filter: blur(12px); /* Suporte para navegadores Safari */
+    
+    border-bottom: 1px solid var(--primary-gold);
+}
+
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+}
+
+.logo-img {
+    height: 100px; /* 1. Coloque o tamanho grandão que você quiser aqui */
+    
+    /* 2. O SEGREDO: A margem negativa puxa a base da logo para fora da contagem do header. 
+       Se a logo ficou muito para baixo ou se o header cresceu, ajuste esse valor (ex: -40px, -60px) */
+    margin-bottom: -10px; 
+    
+    width: auto;
+    object-fit: contain;
+    
+    /* 3. Garante que a ponta da logo que vazar fique por cima do banner da página */
+    position: relative; 
+    z-index: 10;
+}
+
+
+.logo span {
+    font-size: 0.8rem;
+    color: var(--primary-gold);
+}
+
+.navbar nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.navbar nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color var(--transition);
+}
+
+.navbar nav a:hover {
+    color: var(--primary-gold);
+}
+
+/* ==========================================================================
+   3. BOTÕES GERAIS
+   ========================================================================== */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition), border-color var(--transition);
+    border: none;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-gold);
+    color: var(--bg-dark); /* Usando a cor escura para contraste no texto do botão */
+    
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-gold-hover);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.btn-outline:hover {
+    border-color: var(--primary-gold);
+}
+
+.btn-block {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* ==========================================================================
+   4. HERO SECTION (Seção Principal)
+   ========================================================================== */
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    min-height: calc(100vh - 90px);
+    padding: 4rem 2rem; /* Adicionado um padding para garantir respiro no topo e na base */
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.badge .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-gold);
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.hero h1 .highlight {
+    color: var(--primary-gold);
+}
+
+.hero p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    max-width: 90%;
+}
+
+.features-list {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ==========================================================================
+   5. FORMULÁRIO (Transparente estilo Glassmorphism)
+   ========================================================================== */
+.hero-form-wrapper {
+    flex: 1;
+    background-color: var(--bg-form-transparent);
+    padding: 2.5rem;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.contato-coluna {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.btn-topo-container {
+    text-align: center;
+}
+
+.btn-topo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Diminui APENAS o botão "Falar com Contador" acima do formulário */
+.btn-topo-container .btn {
+    padding: 0.5rem 1.2rem; /* Reduz o "recheio" do botão (0.5rem altura, 1.2rem largura) */
+    font-size: 0.85rem;     /* Diminui o tamanho da letra */
+}
+
+.texto-ou {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 1.2rem;
+    text-transform: uppercase;
+   
+    letter-spacing: 2px;
+    padding-left: 2px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.texto-ou::before,
+.texto-ou::after {
+    content: "";
+    width: 60px;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0 15px;
+}
+
+.lead-form h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.lead-form p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+/* Correção de alinhamento e espaçamento das linhas do formulário */
+.form-group {
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 1.2rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.lead-form label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.lead-form input,
+.lead-form select {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: var(--bg-input-transparent);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius);
+    color: var(--text-main);
+    font-family: inherit;
+    outline: none;
+    transition: border-color var(--transition), background-color var(--transition);
+}
+
+.lead-form input:focus,
+.lead-form select:focus {
+    border-color: var(--primary-gold);
+    background-color: rgba(20, 19, 18, 0.8);
+}
+
+/* ==========================================================================
+   6. SEÇÃO DE PLANOS E PREÇOS (Nova Seção)
+   ========================================================================== */
+.pricing-section {
+    /* Tiramos a cor sólida e colocamos um gradiente de transição */
+    background: linear-gradient(to bottom, transparent 0%, #1c1a19 250px, #1c1a19 100%);
+    padding: 6rem 0;
+}
+    
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.subtitle-gold {
+    color: var(--primary-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.pricing-cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.card {
+    background-color: #2a2826; /* Cor da variável var(--bg-card) traduzida */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-featured {
+    border-color: var(--primary-gold);
+    background: linear-gradient(180deg, rgba(42,40,38,1) 0%, rgba(32,31,30,1) 100%);
+}
+
+.badge-featured {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background-color: var(--primary-gold);
+    color: #1a1918;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    letter-spacing: 1px;
+}
+
+.card-category {
+    color: var(--primary-gold);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.price-box {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.price-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+}
+
+.price .currency {
+    color: var(--primary-gold);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.price .amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.price .period {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.card-features {
+    flex-grow: 1;
+    margin-bottom: 2rem;
+}
+
+.features-title {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.card-features ul {
+    list-style: none;
+}
+
+.card-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.check-icon {
+    color: var(--primary-gold);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+/* ==========================================================================
+   7. SEÇÃO SOBRE MIM
+   ========================================================================== */
+/* Note que não tem background-color aqui, o gradiente do body assume o controle */
+.about-section {
+    /* Começa com a cor escura da seção de cima e esfumaça até ficar transparente nos primeiros 250px */
+    background: linear-gradient(to bottom, #1c1a19 0%, transparent 250px);
+    padding: 8rem 0;
+}
+
+.about-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+/* --- Coluna da Esquerda (Cartões e Métricas) --- */
+.about-stats {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    
+    /* A mágica do alinhamento acontece aqui: */
+    display: flex;
+    flex-direction: column;
+    width: fit-content; /* A caixa fica do tamanho exato da frase "Assessoria e Consultoria" */
+}
+
+.titulo-brujar {
+    align-self: center; /* Centraliza a palavra tendo como base o tamanho da linha de baixo */
+}
+
+
+/* A mágica do CSS Grid para o layout 2x2 */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Cria duas colunas de tamanhos iguais */
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background-color: var(--bg-card); /* Fundo sutil para os cartões */
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: border-color var(--transition);
+}
+
+.stat-card:hover {
+    border-color: var(--primary-gold);
+}
+
+.icon-gold {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.stat-card h4 {
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 0.2rem;
+}
+
+.stat-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Métricas em texto sob o grid */
+.stats-text-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--primary-gold);
+    line-height: 1;
+}
+
+.stat-number .plus {
+    font-size: 1.5rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- Coluna da Direita (Textos) --- */
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.badge-outline {
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    border: 1px solid var(--primary-gold);
+    color: var(--primary-gold);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.about-text p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    text-align: justify; /* Alinha o texto reto nas duas pontas */
+}
+
+.text-highlight {
+    color: var(--primary-gold);
+    font-weight: 600;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+
+.iconCard {
+    height: 40px;
+}
+
+.iconPrinc {
+    height: 17px;
+}
+
+
+/* ==========================================================================
+   8. RODAPÉ (FOOTER)
+   ========================================================================== */
+.site-footer {
+    background-color: #1c1a19; /* Cor sólida escura para isolar do gradiente */
+    padding-top: 4rem; /* Aumentei o respiro superior para ficar mais elegante */
+    padding-bottom: 2rem;
+}
+
+/* Transformamos o container principal do topo em uma pilha centralizada */
+.footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.footer-brand {
+    max-width: 600px; /* Largura maior para o texto não quebrar tão cedo */
+}
+
+.footer-brand .logo {
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+/* O texto do CNPJ agora é centralizado */
+.informacoes-contador {
+    text-align: center; 
+    margin: 0 auto; /* Centraliza a própria caixa de texto */
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.footer-contact h4 {
+    color: var(--primary-gold);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.5rem;
+}
+
+/* Centraliza a lista de contatos (WhatsApp e E-mail) */
+.footer-contact ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-contact a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.footer-contact a:hover {
+    color: var(--primary-gold);
+}
+
+.footer-icon {
+    width: 18px; 
+    height: auto; 
+    object-fit: contain;
+}
+
+/* Base do Rodapé (Copyright) empilhada e centralizada */
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08); /* Linha divisória */
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.4); 
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+
+/* ==========================================================================
+   9. RESPONSIVIDADE (Telas Menores)
+   ========================================================================== */
+
+/* ---------------------------------------------------
+   Telas até 768px (Tablets, Smartphones Grandes e Foldables)
+   Objetivo principal: Quebrar as colunas lado a lado para empilhá-las
+--------------------------------------------------- */
+@media (max-width: 768px) {
+    /* CABEÇALHO: Empilha o logo, menu e botão */
+    
+    /* Mantém os textos do formulário alinhados à esquerda no celular */
+    .lead-form label, 
+    .lead-form input, 
+    .lead-form select {
+        text-align: left;
+    }
+
+    html {
+        scroll-padding-top: 190px;
+    }
+    
+    
+    .navbar {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem;
+        position: sticky; /* Remove o sticky em telas muito pequenas para poupar espaço */
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .navbar nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    /* HERO SECTION: Empilha o texto e o formulário */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+        padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem; /* Reduz o título principal */
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    /* PLANOS E PREÇOS: Empilha os cartões */
+    .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    /* SOBRE MIM: Empilha os cartões de status e o texto */
+    .about-wrapper {
+        flex-direction: column-reverse; /* Coloca o texto em cima e os números embaixo */
+        gap: 4rem;
+        text-align: center;
+    }
+
+    .badge-outline {
+        margin: 0 auto 2rem auto; /* Centraliza a badge */
+    }
+
+    /* RODAPÉ: Empilha as colunas de informações */
+    .footer-top {
+        flex-direction: column;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+    
+    .footer-brand .logo {
+        justify-content: center;
+    }
+
+    .informacoes-contador {
+        max-width: 90%;
+        margin: 0 auto;
+        text-align: justify;
+    }
+
+    .footer-links a, .footer-contact a {
+        justify-content: center; /* Centraliza os links com ícones */
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+
+    /* Diminui o buraco entre a seção de Planos e a seção Sobre no celular */
+    .pricing-section {
+        padding-bottom: 2rem; /* Corta o espaço extra abaixo dos cards */
+    }
+
+    .about-section {
+        padding-top: 3rem;    /* Corta o espaço extra acima do título "Sobre a Empresa" */
+    }
+
+    /* Remove o justificado no celular para evitar buracos entre as palavras */
+    .about-text p {
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+}
+
+/* ---------------------------------------------------
+   Telas até 480px (Smartphones Padrão)
+   Objetivo principal: Ajuste fino de fontes, formulários e botões
+--------------------------------------------------- */
+@media (max-width: 480px) {
+    /* Reduz ainda mais os títulos para não quebrarem palavras grandes */
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .section-header h2, .about-text h2 {
+        font-size: 2.2rem;
+    }
+
+    /* FORMULÁRIO: Coloca os campos de E-mail e WhatsApp um embaixo do outro */
+    .form-row {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    /* BOTÕES: Deixa os botões ocuparem a largura total da tela para facilitar o clique */
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    /* Diminui o logo no topo para não ocupar tanta tela */
+    .logo-img {
+        height: 80px; 
+        margin-bottom: 0; 
+    }
+}
+
+/* ---------------------------------------------------
+   Telas até 360px (Modelos Antigos ou Telas Muito Pequenas)
+   Objetivo principal: Espremer grades e espaçamentos internos
+--------------------------------------------------- */
+@media (max-width: 360px) {
+    /* SOBRE MIM: Empilha os dois quadradinhos de "Especialista" e "Contador" */
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reduz espaçamentos internos para a tela "respirar" */
+    .hero-form-wrapper, .card {
+        padding: 1.5rem;
+    }
+
+    .price .amount {
+        font-size: 2.8rem; /* Diminui o preço do plano */
+    }
+}

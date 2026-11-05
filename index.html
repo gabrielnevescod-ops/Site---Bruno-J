@@ -51,36 +51,38 @@
                 <div class="btn-topo-container">
                     <a href="https://wa.me/5551989333113?text=Olá,%20Bruno!%20Gostaria%20de%20saber%20mais%20sobre%20a%20assessoria%20contábil.
                     " target="_blank" class="btn btn-primary">Fale com o contador</a>
-                    
+
                     <p class="texto-ou">ou</p>
                 </div>
 
                 <div id="contato" class="hero-form-wrapper">
-                    <form class="lead-form">
+
+                    <!-- Substitua o link abaixo pelo Endpoint gerado no Formspree -->
+                    <form class="lead-form" action=https://formspree.io/f/xzeeokrz method="POST">
+
                         <h2>Solicite uma análise gratuita</h2>
                         <p>Preencha seus dados e entro em contato em até 24h.</p>
 
                         <div class="form-group">
                             <label for="nome">NOME COMPLETO</label>
-                            <input type="text" id="nome" placeholder="Seu nome" required>
+                            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">E-MAIL</label>
-                                <input type="email" id="email" placeholder="seu@email.com" required>
+                                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
                             </div>
                             <div class="form-group">
                                 <label for="whatsapp">WHATSAPP</label>
-                                <input type="tel" id="whatsapp" placeholder="(51) 9 9999-9999" required>
+                                <input type="tel" id="whatsapp" name="whatsapp" placeholder="(51) 9 9999-9999" required>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <!-- Primeira Seleção: O que o cliente precisa -->
                             <div class="form-group">
                                 <label for="necessidade">DO QUE PRECISA?</label>
-                                <select id="necessidade" required>
+                                <select id="necessidade" name="necessidade" required>
                                     <option value="">Selecione</option>
                                     <option value="abrir_empresa">Abrir uma empresa</option>
                                     <option value="trocar_contador">Trocar de contador</option>
@@ -88,10 +90,9 @@
                                 </select>
                             </div>
 
-                            <!-- Segunda Seleção: Setor da empresa -->
                             <div class="form-group">
                                 <label for="setor">SETOR DE ATUAÇÃO</label>
-                                <select id="setor" required>
+                                <select id="setor" name="setor" required>
                                     <option value="">Selecione</option>
                                     <option value="servicos">Serviços</option>
                                     <option value="comercio">Comércio</option>
@@ -101,6 +102,8 @@
 
                         <button type="submit" class="btn btn-primary btn-block">Solicitar Análise Gratuita →</button>
                     </form>
+
+
                 </div>
         </section>
 
@@ -113,8 +116,8 @@
                 </div>
 
                 <div class="pricing-cards">
-                    
-                        <div class="card card-featured">
+
+                    <div class="card card-featured">
                         <div class="card-header">
                             <span class="card-category">Assessoria Mensal · Simples Nacional</span>
                             <h3>Serviços</h3>
@@ -218,7 +221,14 @@
                         <img src="./logoPNG.png" alt="" class="iconPrinc"> RS-011117/O · Empresa contábil
                     </div>
 
-                    <p> "Somos um escritório de contabilidade digital especializado no atendimento a pequenos e médios negócios enquadrados no Simples Nacional. Unimos tecnologia, atendimento próximo e excelência técnica para oferecer soluções contábeis, fiscais, trabalhistas e financeiras que apoiam o crescimento sustentável de cada empresa. Nosso compromisso é compreender as particularidades de cada segmento de atuação, proporcionando um atendimento personalizado, com orientações estratégicas e total conformidade com a legislação. Mais do que cumprir obrigações, trabalhamos para agregar valor ao negócio dos nossos clientes, oferecendo segurança, eficiência e confiança em cada etapa da sua jornada empresarial."</p>
+                    <p> "Somos um escritório de contabilidade digital especializado no atendimento a pequenos e médios
+                        negócios enquadrados no Simples Nacional. Unimos tecnologia, atendimento próximo e excelência
+                        técnica para oferecer soluções contábeis, fiscais, trabalhistas e financeiras que apoiam o
+                        crescimento sustentável de cada empresa. Nosso compromisso é compreender as particularidades de
+                        cada segmento de atuação, proporcionando um atendimento personalizado, com orientações
+                        estratégicas e total conformidade com a legislação. Mais do que cumprir obrigações, trabalhamos
+                        para agregar valor ao negócio dos nossos clientes, oferecendo segurança, eficiência e confiança
+                        em cada etapa da sua jornada empresarial."</p>
                 </div>
             </div>
         </section>
@@ -237,7 +247,7 @@
                         69.20-6-01 - Atividades de contabilidade</p>
                 </div>
 
-               
+
 
                 <div class="footer-contact">
                     <h4>Contato</h4>
@@ -275,7 +285,61 @@
                 caixaSetor.focus();
             }, 800);
         }
+
+        // Seleciona o formulário
+const formulario = document.querySelector('.lead-form');
+
+formulario.addEventListener('submit', function(event) {
+    // 1. Impede o comportamento padrão de redirecionar para a página branca
+    event.preventDefault(); 
+
+    const botao = formulario.querySelector('button[type="submit"]');
+    const textoOriginal = botao.innerHTML;
+    
+    // 2. Muda o botão para estado de carregamento e desativa para evitar duplo clique
+    botao.innerHTML = 'Enviando...';
+    botao.disabled = true;
+
+    // 3. Coleta os dados preenchidos
+    const dados = new FormData(formulario);
+
+    // 4. Envia para o Formspree via Fetch API
+    fetch(formulario.action, {
+        method: formulario.method,
+        body: dados,
+        headers: {
+            'Accept': 'application/json' // Avisa o Formspree que queremos resposta via código, não página HTML
+        }
+    }).then(response => {
+        if (response.ok) {
+            // Sucesso! Muda o texto e limpa o formulário
+            botao.innerHTML = 'Solicitação enviada ✓';
+            botao.style.backgroundColor = '#2e7d32'; // Fica num tom verde elegante
+            botao.style.color = '#ffffff';
+            formulario.reset(); 
+
+            // Opcional: Volta o botão ao normal após 5 segundos
+            setTimeout(() => {
+                botao.innerHTML = textoOriginal;
+                botao.disabled = false;
+                botao.style.backgroundColor = ''; // Remove o verde, volta a cor original
+                botao.style.color = '';
+            }, 5000);
+
+        } else {
+            // Caso ocorra algum erro no Formspree
+            botao.innerHTML = 'Erro ao enviar. Tente novamente.';
+            botao.disabled = false;
+        }
+    }).catch(erro => {
+        // Caso falhe a internet do usuário
+        botao.innerHTML = 'Erro de conexão. Tente novamente.';
+        botao.disabled = false;
+    });
+});
     </script>
+
+
 
 
 </body>
